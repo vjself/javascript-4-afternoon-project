@@ -30,7 +30,17 @@
 */
 
 //Code Here
-
+class Employee {
+  constructor(first_name, last_name, email, age) {
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.email = email;
+    this.age = age;
+    this.makeWidget = function() {
+      return `${this.first_name} ${this.last_name} Widget`;
+    };
+  }
+}
 
 ////////// PROBLEM 2 //////////
 
@@ -48,8 +58,30 @@
 */
 
 //Code Here
+class Manager {
+  constructor(first_name, last_name, email, age) {
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.email = email;
+    this.age = age;
+    this.reports = [];
+  }
+  hire(employee) {
+    return this.reports.push(employee);
+  }
+  fire(index) {
+    for (let i = 0; i < this.reports.length; i++) {
+      if (i === index) {
+        this.reports.splice(i, 1);
+      }
+    }
+    return this.reports;
+  }
 
-
+  makeWidget() {
+    return `${this.first_name} ${this.last_name} Widget`;
+  }
+}
 ////////// PROBLEM 3 //////////
 
 /*
@@ -72,8 +104,49 @@
 */
 
 //Code Here
+class ProgressiveManager {
+  constructor(first_name, last_name, email, age) {
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.email = email;
+    this.age = age;
+    this.reports = [];
+    this.title = "Not a manager";
+    this.bonus = 0;
+  }
 
+  hire(employee) {
+    let r = this.reports;
+    r.push(employee);
+    if (r.length === 0) {
+      return (this.title = "Not a manager");
+    } else if (r.length >= 1 && r.length <= 3) {
+      return (this.title = "Barely Manager");
+    } else if (r.length >= 4 && r.length <= 10) {
+      return (this.title = "Mostly Manager");
+    } else if (r.length >= 11 && r.length <= 50) {
+      return (this.title = "Manager");
+    } else if (r.length >= 51 && r.length <= 100) {
+      return (this.title = "Manager Plus");
+    } else {
+      return (this.title = "Bestest Manager");
+    }
+  }
 
+  fire(index) {
+    for (let i = 0; i < this.reports.length; i++) {
+      if (i === index) {
+        this.reports.splice(i, 1);
+      }
+    }
+    this.bonus += 100;
+    return this.reports;
+  }
+
+  makeWidget() {
+    return `${this.first_name} ${this.last_name} Widget`;
+  }
+}
 
 ////////// PROBLEM 4 - Black Diamond //////////
 
@@ -99,5 +172,29 @@
 */
 
 //Code Here
+class Machine {
+  constructor() {
+    this.widgets_made_count = 0;
+    this.wear_and_tear_count = 0;
+    this.needs_reboot = false;
+  }
 
+  makeWidgets(num) {
+    if (this.widgets_made_count < 50) {
+    }
+    this.widgets_made_count += num;
+    return this.widgets_made_count;
+  }
 
+  fixMachine() {
+    this.needs_reboot = true;
+    return this.needs_reboot;
+  }
+
+  reboot() {
+    if (this.needs_reboot === true) {
+      this.reboot = false;
+      this.wear_and_tear_count -= 10;
+    }
+  }
+}
